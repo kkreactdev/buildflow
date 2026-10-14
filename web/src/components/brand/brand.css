@@ -1,0 +1,8 @@
+/* Shared company-brand behaviour. The light/dark asset is chosen in JS (see CompanyBrand.jsx), so there
+   is no theme swap here — only sizing defaults and the mark-is-collapsed-only rule. */
+
+.brand-logo,
+.brand-mark { display: block; }
+
+/* The mark only belongs in the collapsed rail; the sidebar's own rules reveal it. */
+.brand-mark { display: none; }

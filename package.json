@@ -1,0 +1,16 @@
+{
+  "name": "buildflow",
+  "private": true,
+  "description": "BuildFlow CRM — convenience scripts (server/ and web/ are independent packages)",
+  "scripts": {
+    "install:all": "npm --prefix server ci && npm --prefix web ci",
+    "dev:server": "npm --prefix server run dev",
+    "dev:worker": "npm --prefix server run dev:worker",
+    "dev:web": "npm --prefix web run dev",
+    "typecheck": "npm --prefix server run typecheck",
+    "lint": "npm --prefix server run lint && npm --prefix web run lint",
+    "test": "npm --prefix server test && npm --prefix web test",
+    "build": "npm --prefix server run build && npm --prefix web run build",
+    "check": "npm run typecheck && npm run lint && npm run test && npm run build"
+  }
+}

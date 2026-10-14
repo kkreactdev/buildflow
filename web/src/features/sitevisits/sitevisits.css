@@ -1,0 +1,84 @@
+.pick-list {
+  list-style: none;
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  max-height: 180px;
+  overflow-y: auto;
+}
+.pick-list li + li {
+  border-top: 1px solid var(--border);
+}
+.pick-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  border: 0;
+  text-align: left;
+  color: var(--ink);
+  cursor: pointer;
+}
+.pick-row:hover {
+  background: var(--surface-2);
+}
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px var(--space-2);
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font-size: var(--text-sm);
+}
+.chip button {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--ink-muted);
+}
+.visit-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--border);
+}
+.visit-row:first-of-type {
+  border-top: 0;
+}
+
+/* Linked-unit picker: a row carries TWO facts, so it wraps the badges under the unit's name instead of
+   forcing them onto one line (which pushed the checkbox row taller than the list it lives in). */
+.unit-picker-badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-left: var(--space-2);
+  vertical-align: middle;
+}
+.unit-picker-via {
+  display: block;
+  font-size: 12px;
+}
+/* Nothing is linked: say so, and give the one action that actually changes it. Deliberately NOT a
+   fallback list of every branch unit — a visit shows what the person is considering. */
+.unit-picker-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+}

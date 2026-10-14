@@ -1,0 +1,23 @@
+.card {
+  background:
+    radial-gradient(140% 100% at 0% 0%, color-mix(in srgb, var(--color-primary) 7%, transparent) 0%, transparent 55%),
+    linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+}
+
+/* Only lift padded "panel" cards on hover (stat tiles, chart panels, site
+   tiles) — the two full-bleed table containers (LeadsTable, PlotsTable) use
+   padded={false} and stay put, since a data table shouldn't shift under the
+   cursor while you're scanning rows inside it. */
+.card-padded:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border);
+  transform: translateY(-2px);
+}
+
+.card-padded {
+  padding: var(--space-5);
+}

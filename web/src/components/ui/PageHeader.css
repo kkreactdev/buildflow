@@ -1,0 +1,5 @@
+.page-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: var(--space-3); margin-bottom: var(--space-5); }
+.page-head h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+.page-head-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 2px; }
+.page-head-sub { margin-top: 4px; color: var(--ink-muted); max-width: 70ch; }
+.page-head-actions { display: flex; gap: var(--space-2); flex-wrap: wrap; }

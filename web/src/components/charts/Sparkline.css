@@ -1,0 +1,51 @@
+.sparkline-wrap {
+  position: relative;
+  display: block;
+}
+
+.sparkline-wrap.is-interactive svg {
+  pointer-events: auto;
+  cursor: crosshair;
+}
+
+.sparkline-crosshair {
+  stroke: var(--ink-muted);
+  stroke-width: 1;
+  stroke-dasharray: 2 2;
+  opacity: 0.6;
+}
+
+.sparkline-end-dot,
+.sparkline-hover-dot {
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+}
+
+.sparkline-tooltip {
+  position: absolute;
+  bottom: 100%;
+  transform: translate(-50%, -6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+  color: var(--paper);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 5;
+  box-shadow: var(--shadow-md);
+}
+
+.sparkline-tooltip strong {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.sparkline-tooltip span {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--paper) 70%, transparent);
+}

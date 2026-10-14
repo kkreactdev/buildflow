@@ -1,0 +1,97 @@
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+.filter-bar-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.filter-bar-actions {
+  margin-left: auto;
+  display: flex;
+  gap: var(--space-2);
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 240px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink-muted);
+}
+.search-input input {
+  flex: 1;
+  height: 38px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+}
+
+.data-table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden; /* rounds the corners; the scrolling happens in .data-table-scroll */
+}
+.data-table {
+  border-collapse: collapse;
+}
+.data-table th,
+.data-table td {
+  padding: 12px var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--border-soft);
+}
+.data-table th {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  background: var(--surface-2);
+}
+.data-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.data-table tr.is-clickable {
+  cursor: pointer;
+}
+.data-table tr.is-clickable:hover {
+  background: var(--surface-2);
+}
+.data-table-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+}
+.data-table-actions-col {
+  width: 48px;
+  text-align: right !important;
+}
+
+/* Horizontal scrolling: the table keeps the width its content needs and scrolls inside this container, never the page. */
+.data-table-scroll { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.data-table-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: var(--radius-sm); }
+.data-table { width: 100%; min-width: max-content; }
+.data-table th, .data-table td { white-space: nowrap; }
+.data-table th.is-wrap, .data-table td.is-wrap { white-space: normal; overflow-wrap: anywhere; max-width: 380px; }
+.data-table td { font-variant-numeric: tabular-nums; }
+/* The row-action column stays reachable at the right edge while the other columns scroll. */
+.data-table .data-table-actions-col { position: sticky; right: 0; z-index: 1; background: var(--surface); box-shadow: -8px 0 8px -8px rgba(16, 20, 15, 0.14); }
+.data-table thead .data-table-actions-col { background: color-mix(in srgb, var(--accent) 5%, var(--surface-2)); }
+.data-table tr.is-clickable:hover .data-table-actions-col { background: var(--surface-2); }

@@ -1,0 +1,75 @@
+/* Donut Chart Styles */
+.donut-chart-container,
+.donut-chart-empty {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.donut-svg {
+  overflow: visible;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.06));
+}
+
+.donut-slice {
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  transform-origin: center;
+}
+
+.donut-slice.is-hovered {
+  opacity: 1;
+}
+
+.donut-slice:not(.is-hovered) {
+  opacity: 0.94;
+}
+
+.donut-center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 65%;
+  line-height: 1.15;
+}
+
+.donut-center-val {
+  font-family: var(--font-mono, monospace);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.donut-center-sub {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+
+.donut-center-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  margin-top: 2px;
+}
+
+.donut-center-count {
+  font-size: 10px;
+  color: var(--ink-muted);
+  font-weight: 600;
+  margin-top: 1px;
+}

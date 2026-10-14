@@ -1,0 +1,24 @@
+.doc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--border);
+}
+.doc-row:first-of-type {
+  border-top: 0;
+}
+.doc-meta {
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+}
+.doc-link {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--primary, #3f6690);
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+}

@@ -1,0 +1,38 @@
+# Production-like stack. MongoDB is NOT included: point MONGODB_URI at a replica
+# set (MongoDB Atlas, or your own). For development run the API/web directly
+# (see README) — no local Mongo container is required when using Atlas.
+#
+#   cp server/.env.example server/.env   # fill in real values
+#   docker compose up --build
+services:
+  api:
+    build: ./server
+    env_file: ./server/.env
+    environment:
+      NODE_ENV: production
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  worker:
+    build: ./server
+    command: ["node", "dist/worker.js"]
+    env_file: ./server/.env
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
+    depends_on:
+      - api
+
+  web:
+    build: ./web
+    ports:
+      - "8081:80"
+    depends_on:
+      - api
+    restart: unless-stopped

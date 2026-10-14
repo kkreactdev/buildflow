@@ -1,0 +1,331 @@
+/* ---------------------------------------------------------------------- */
+/* BuildFlow design tokens                                                */
+/* Light is the default; dark applies via prefers-color-scheme, and both  */
+/* can be forced with [data-theme="light"|"dark"] on <html>.              */
+/* ---------------------------------------------------------------------- */
+
+:root {
+  /* type */
+  --font-display: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* spacing + shape */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(16, 20, 15, 0.06);
+  --shadow-md: 0 6px 20px -8px rgba(16, 20, 15, 0.18);
+  --shadow-card: 0 1px 0 rgba(16, 20, 15, 0.03), 0 8px 24px -16px rgba(16, 20, 15, 0.22);
+  --shadow-lg: 0 2px 8px rgba(16, 20, 15, 0.08), 0 24px 48px -20px rgba(16, 20, 15, 0.34);
+
+  --sidebar-w: 232px;
+  --sidebar-w-collapsed: 76px;
+  --topbar-h: 72px;
+
+  --transition-fast: 120ms ease;
+  --transition-base: 180ms ease;
+
+  /* -- light palette (default) ------------------------------------ */
+  --paper: #f1f2ec;
+  --surface: #ffffff;
+  --surface-2: #f7f8f3;
+  --surface-3: #eaece3;
+  --ink: #16211c;
+  --ink-2: #4b5850;
+  --ink-muted: #64726a;
+  --border: rgba(22, 33, 28, 0.12);
+  --border-soft: rgba(22, 33, 28, 0.07);
+
+  /* premium forest/emerald primary — deeper & more saturated than the old
+     muted sea-green so buttons, active states and chart lines read as an
+     intentional brand color instead of blending into the sage backdrop. */
+  --accent: #047857;
+  --accent-strong: #065f46;
+  --accent-soft: #d9f2e7;
+  --accent-ink: #045c3f;
+
+  /* vivid warm amber secondary — was a muted brown-gold, now a proper
+     contrast color for highlights, conversion metrics & CTAs. */
+  --gold: #d97706;
+  --gold-soft: #fbead0;
+  --gold-ink: #78350f;
+  --gold-strong: #b45309;
+
+  /* Semantic primary/secondary pair — primary is the existing accent green,
+     secondary is the existing gold, given first-class names so components
+     reach for a deliberate brand pairing instead of --accent/--gold ad hoc. */
+  --color-primary: var(--accent);
+  --color-primary-strong: var(--accent-strong);
+  --color-primary-soft: var(--accent-soft);
+  --color-primary-ink: var(--accent-ink);
+
+  --color-secondary: var(--gold);
+  --color-secondary-strong: var(--gold-strong);
+  --color-secondary-soft: var(--gold-soft);
+  --color-secondary-ink: var(--gold-ink);
+
+  /* KPI card category accents (StatStrip) — each pair is a soft tint +
+     WCAG AA ink (>=4.5:1 on its own soft bg), verified in scratch/contrast.js. */
+  --kpi-leads: #059669;
+  --kpi-leads-soft: #d1fae5;
+  --kpi-leads-ink: #065f46;
+
+  --kpi-visits: #0284c7;
+  --kpi-visits-soft: #e0f2fe;
+  --kpi-visits-ink: #075985;
+
+  --kpi-conversion: var(--gold);
+  --kpi-conversion-soft: var(--gold-soft);
+  --kpi-conversion-ink: var(--gold-ink);
+
+  --kpi-pipeline: #7c3aed;
+  --kpi-pipeline-soft: #ede9fe;
+  --kpi-pipeline-ink: #4c1d95;
+
+  --chart-grid: rgba(22, 33, 28, 0.11);
+
+  /* semantic feedback colours (business status colours come from masters at runtime) */
+  --danger: #a3342b;
+  --danger-soft: rgba(211, 72, 63, 0.14);
+  --success: #1f7a3d;
+  --success-soft: rgba(31, 122, 61, 0.14);
+  --warning: #9a5b0a;
+  --warning-soft: rgba(217, 119, 6, 0.14);
+  --info: #3f6690;
+  --info-soft: rgba(63, 102, 144, 0.14);
+
+  /* delta text */
+  --delta-good: #1f7a3d;
+  --delta-bad: #b4483f;
+  /* Text-only shades for the delta pill (stat-delta-good/bad in StatStrip.css):
+     --delta-good/bad text-on-its-own-14%-tint measures ~4.4:1, just under
+     WCAG AA's 4.5:1 for small text. These are darkened just enough to clear
+     it, without changing the base tokens used elsewhere (PulseDot, etc). */
+  --delta-good-ink: #186b35;
+  --delta-bad-ink: #903a32;
+
+  color-scheme: light;
+}
+
+/* -- dark palette: OS preference ------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #10140f;
+    --surface: #171e1a;
+    --surface-2: #1c241f;
+    --surface-3: #232c26;
+    --ink: #e9ede6;
+    --ink-2: #b4bfb3;
+    --ink-muted: #7d8b7f;
+    --border: rgba(233, 237, 230, 0.12);
+    --border-soft: rgba(233, 237, 230, 0.07);
+
+    --accent: #34957d;
+    --accent-strong: #48b296;
+    --accent-soft: rgba(52, 149, 125, 0.16);
+    --accent-ink: #8fddc4;
+
+    --gold: #fbbf24;
+    --gold-soft: rgba(217, 119, 6, 0.2);
+    --gold-ink: #fcd34d;
+    --gold-strong: #f59e0b;
+
+    --color-primary: var(--accent);
+    --color-primary-strong: var(--accent-strong);
+    --color-primary-soft: var(--accent-soft);
+    --color-primary-ink: var(--accent-ink);
+
+    --color-secondary: var(--gold);
+    --color-secondary-strong: var(--gold-strong);
+    --color-secondary-soft: var(--gold-soft);
+    --color-secondary-ink: var(--gold-ink);
+
+    --kpi-leads: #34d399;
+    --kpi-leads-soft: rgba(52, 211, 153, 0.18);
+    --kpi-leads-ink: #6ee7b7;
+
+    --kpi-visits: #38bdf8;
+    --kpi-visits-soft: rgba(56, 189, 248, 0.18);
+    --kpi-visits-ink: #7dd3fc;
+
+    --kpi-conversion: var(--gold);
+    --kpi-conversion-soft: var(--gold-soft);
+    --kpi-conversion-ink: var(--gold-ink);
+
+    --kpi-pipeline: #a78bfa;
+    --kpi-pipeline-soft: rgba(167, 139, 250, 0.18);
+    --kpi-pipeline-ink: #c4b5fd;
+
+    --chart-grid: rgba(233, 237, 230, 0.12);
+
+    --danger: #e28d84;
+    --danger-soft: rgba(224, 141, 132, 0.16);
+    --success: #4cbe72;
+    --success-soft: rgba(76, 190, 114, 0.16);
+    --warning: #eab84a;
+    --warning-soft: rgba(217, 162, 76, 0.16);
+    --info: #8db4dd;
+    --info-soft: rgba(127, 160, 196, 0.18);
+
+    /* deliberately darker than --accent — needs to hold 4.5:1 under solid
+       white text, which the brighter interactive --accent no longer clears. */
+
+    --delta-good: #4cbe72;
+    --delta-bad: #d6746a;
+    /* good already clears 4.5:1 on its own tint (~5.2:1); bad doesn't (~4.1:1)
+       — brightened just for the pill text, see light-mode note above. */
+    --delta-good-ink: var(--delta-good);
+    --delta-bad-ink: #e0897d;
+
+    color-scheme: dark;
+  }
+}
+
+/* -- dark palette: manual override via data-theme="dark" ------------- */
+:root[data-theme='dark'] {
+  --paper: #10140f;
+  --surface: #171e1a;
+  --surface-2: #1c241f;
+  --surface-3: #232c26;
+  --ink: #e9ede6;
+  --ink-2: #b4bfb3;
+  --ink-muted: #7d8b7f;
+  --border: rgba(233, 237, 230, 0.12);
+  --border-soft: rgba(233, 237, 230, 0.07);
+
+  --accent: #34957d;
+  --accent-strong: #48b296;
+  --accent-soft: rgba(52, 149, 125, 0.16);
+  --accent-ink: #8fddc4;
+
+  --gold: #fbbf24;
+  --gold-soft: rgba(217, 119, 6, 0.2);
+  --gold-ink: #fcd34d;
+  --gold-strong: #f59e0b;
+
+  --color-primary: var(--accent);
+  --color-primary-strong: var(--accent-strong);
+  --color-primary-soft: var(--accent-soft);
+  --color-primary-ink: var(--accent-ink);
+
+  --color-secondary: var(--gold);
+  --color-secondary-strong: var(--gold-strong);
+  --color-secondary-soft: var(--gold-soft);
+  --color-secondary-ink: var(--gold-ink);
+
+  --kpi-leads: #34d399;
+  --kpi-leads-soft: rgba(52, 211, 153, 0.18);
+  --kpi-leads-ink: #6ee7b7;
+
+  --kpi-visits: #38bdf8;
+  --kpi-visits-soft: rgba(56, 189, 248, 0.18);
+  --kpi-visits-ink: #7dd3fc;
+
+  --kpi-conversion: var(--gold);
+  --kpi-conversion-soft: var(--gold-soft);
+  --kpi-conversion-ink: var(--gold-ink);
+
+  --kpi-pipeline: #a78bfa;
+  --kpi-pipeline-soft: rgba(167, 139, 250, 0.18);
+  --kpi-pipeline-ink: #c4b5fd;
+
+  --chart-grid: rgba(233, 237, 230, 0.12);
+
+  --danger: #e28d84;
+  --danger-soft: rgba(224, 141, 132, 0.16);
+  --success: #4cbe72;
+  --success-soft: rgba(76, 190, 114, 0.16);
+  --warning: #eab84a;
+  --warning-soft: rgba(217, 162, 76, 0.16);
+  --info: #8db4dd;
+  --info-soft: rgba(127, 160, 196, 0.18);
+
+  --delta-good: #4cbe72;
+  --delta-bad: #d6746a;
+  --delta-good-ink: var(--delta-good);
+  --delta-bad-ink: #e0897d;
+
+  color-scheme: dark;
+}
+
+/* -- explicit light override (wins over OS dark preference) ---------- */
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Tone system (Phase 12 redesign): one --tone / --tone-2 pair per colour  */
+/* family. Components set `tone-<name>` and read --tone; soft/ink variants */
+/* are mixed from the surface so they work in light and dark themes.       */
+/* ---------------------------------------------------------------------- */
+:root {
+  --tone-teal: #0d9488;
+  --tone-teal-2: #34d399;
+  --tone-blue: #2563eb;
+  --tone-blue-2: #38bdf8;
+  --tone-cyan: #0891b2;
+  --tone-cyan-2: #22d3ee;
+  --tone-violet: #7c3aed;
+  --tone-violet-2: #c084fc;
+  --tone-amber: #d97706;
+  --tone-amber-2: #fbbf24;
+  --tone-coral: #dc2626;
+  --tone-coral-2: #fb923c;
+  --tone-green: #16a34a;
+  --tone-green-2: #4ade80;
+  --tone-sky: #0284c7;
+  --tone-sky-2: #7dd3fc;
+  --tone-rose: #e11d48;
+  --tone-rose-2: #fb7185;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --reveal-distance: 14px;
+  --reveal-duration: 520ms;
+  --glass: color-mix(in srgb, var(--surface) 78%, transparent);
+}
+
+.tone-teal { --tone: var(--tone-teal); --tone-2: var(--tone-teal-2); }
+.tone-blue { --tone: var(--tone-blue); --tone-2: var(--tone-blue-2); }
+.tone-cyan { --tone: var(--tone-cyan); --tone-2: var(--tone-cyan-2); }
+.tone-violet { --tone: var(--tone-violet); --tone-2: var(--tone-violet-2); }
+.tone-amber { --tone: var(--tone-amber); --tone-2: var(--tone-amber-2); }
+.tone-coral { --tone: var(--tone-coral); --tone-2: var(--tone-coral-2); }
+.tone-green { --tone: var(--tone-green); --tone-2: var(--tone-green-2); }
+.tone-sky { --tone: var(--tone-sky); --tone-2: var(--tone-sky-2); }
+.tone-rose { --tone: var(--tone-rose); --tone-2: var(--tone-rose-2); }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --tone-teal: #2dd4bf;
+    --tone-blue: #60a5fa;
+    --tone-cyan: #22d3ee;
+    --tone-violet: #a78bfa;
+    --tone-amber: #fbbf24;
+    --tone-coral: #f87171;
+    --tone-green: #4ade80;
+    --tone-sky: #38bdf8;
+    --tone-rose: #fb7185;
+  }
+}
+:root[data-theme='dark'] {
+  --tone-teal: #2dd4bf;
+  --tone-blue: #60a5fa;
+  --tone-cyan: #22d3ee;
+  --tone-violet: #a78bfa;
+  --tone-amber: #fbbf24;
+  --tone-coral: #f87171;
+  --tone-green: #4ade80;
+  --tone-sky: #38bdf8;
+  --tone-rose: #fb7185;
+}

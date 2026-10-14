@@ -1,0 +1,215 @@
+.sidebar {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  height: 100vh;
+  width: var(--sidebar-w);
+  flex: 0 0 var(--sidebar-w);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  /* Width is the ONLY thing that animates, so the main column and the topbar resize with the rail in
+     one step and nothing in between ever reflows. */
+  transition: width var(--transition-base), flex-basis var(--transition-base);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: var(--topbar-h);
+  padding: 0 var(--space-5);
+  border-bottom: 1px solid var(--border-soft);
+  flex: 0 0 auto;
+  position: relative;
+}
+
+/* ---- brand artwork sizing ------------------------------------------------------------------------------
+   Sizing only: the light/dark asset is chosen in JS by CompanyBrand, so there is nothing to swap here.
+   `width: auto` with a `max-height` preserves the artwork's aspect ratio at any rail width, so an
+   uploaded logo can never be stretched. */
+.sidebar-logo {
+  height: auto;
+  max-height: 32px;
+  max-width: 100%;
+  width: auto;
+}
+.sidebar-mark {
+  height: auto;
+  max-height: 30px;
+  max-width: 100%;
+  width: auto;
+}
+
+/* ---- collapse control -------------------------------------------------------------------------------- */
+.sidebar-toggle {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--ink-2);
+  cursor: pointer;
+  flex: 0 0 auto;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.sidebar-toggle:hover { background: var(--surface-2); color: var(--ink); }
+.sidebar-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* The chevron points the way the rail will move: right to expand, left to collapse. */
+.sidebar-toggle-icon { transition: transform var(--transition-base); }
+
+.sidebar-close {
+  display: none;
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  padding: var(--space-2);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3);
+  flex: 1 1 auto;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 10px var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--ink-2);
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.sidebar-link:hover {
+  background: var(--surface-2);
+  color: var(--ink);
+}
+
+.sidebar-link.is-active {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+.sidebar-group {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-group-label {
+  padding: 0 var(--space-3) var(--space-2);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.sidebar-empty {
+  padding: var(--space-3);
+  color: var(--ink-muted);
+}
+
+.sidebar-scrim {
+  display: none;
+}
+
+/* ---- the collapsed rail -----------------------------------------------------------------------------
+   Scoped to the desktop breakpoint on purpose: below 900px the sidebar is a drawer (see the end of
+   this file) and must always render expanded, so none of these rules — or the width they set — can
+   reach it, and no override block is needed to undo them. */
+@media (min-width: 901px) {
+  .sidebar.is-collapsed {
+    width: var(--sidebar-w-collapsed);
+    flex: 0 0 var(--sidebar-w-collapsed);
+  }
+
+  /* The mark replaces the lockup, centred in the narrower rail. Exactly one is ever in the DOM
+     (CompanyBrand renders a single image), so this cannot leave both visible. */
+  .sidebar.is-collapsed .sidebar-brand { justify-content: center; padding: 0 var(--space-3); gap: 0; }
+  .sidebar.is-collapsed .sidebar-logo { display: none; }
+  .sidebar.is-collapsed .sidebar-mark { display: block; }
+
+  /* Labels and group headings leave the layout entirely — never merely faded — so no fragment of
+     text and no empty band is left behind. */
+  .sidebar.is-collapsed .sidebar-link { justify-content: center; padding: 10px 0; }
+  .sidebar.is-collapsed .sidebar-link-label,
+  .sidebar.is-collapsed .sidebar-group-label { display: none; }
+
+  /* With no label to carry it, the active page keeps a full-row tint AND an edge marker. */
+  .sidebar.is-collapsed .sidebar-link.is-active { box-shadow: inset 3px 0 0 var(--accent); }
+
+  /* A hairline rule stands in for the heading: groups stay apart without a gap where text was. */
+  .sidebar.is-collapsed .sidebar-group {
+    margin-top: var(--space-3);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--border-soft);
+  }
+  .sidebar.is-collapsed .sidebar-group:first-of-type { border-top: 0; padding-top: 0; }
+
+  /* In the collapsed rail the brand row is too narrow to hold the control beside the mark, so it
+     floats over it and appears on hover or keyboard focus. It is still focusable and still labelled,
+     so it never becomes unreachable. */
+  .sidebar.is-collapsed .sidebar-toggle {
+    margin-left: 0;
+    position: absolute;
+    top: 22px;
+    right: 6px;
+    opacity: 0;
+    background: var(--surface);
+  }
+  .sidebar.is-collapsed:hover .sidebar-toggle,
+  .sidebar.is-collapsed .sidebar-brand:focus-within .sidebar-toggle { opacity: 1; }
+  .sidebar.is-collapsed .sidebar-toggle-icon { transform: rotate(0deg); }
+  .sidebar:not(.is-collapsed) .sidebar-toggle-icon { transform: rotate(180deg); }
+}
+
+/* Motion here is decoration; with it turned off the rail simply snaps between widths. */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .sidebar-toggle-icon { transition: none; }
+}
+
+/* ---- mobile: a drawer, not a rail ------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    z-index: 60;
+    left: 0;
+    width: var(--sidebar-w);
+    flex: 0 0 var(--sidebar-w);
+    transform: translateX(-100%);
+    transition: transform var(--transition-base);
+    box-shadow: var(--shadow-lg);
+  }
+  .sidebar.is-open {
+    transform: translateX(0);
+  }
+  /* The drawer is always expanded: the collapse control is meaningless on an overlay, and the Close
+     button is the way out. */
+  .sidebar-toggle { display: none; }
+  .sidebar-close {
+    display: inline-flex;
+  }
+  .sidebar-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgba(0, 0, 0, 0.4);
+  }
+}

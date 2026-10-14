@@ -1,0 +1,62 @@
+.page-center {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-5);
+}
+.page-card {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.page-card h1 {
+  font-size: 22px;
+}
+.page-card p {
+  color: var(--ink-2);
+}
+.preview-box {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.preview-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.page-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+.page-header h2 {
+  font-size: 20px;
+}
+
+/* Login brand logo: the FULL lockup (icon + company name), not the mark-only image. The box is fixed and
+   the artwork is fitted with `object-fit: contain`, so it letterboxes but can never be stretched, at any
+   viewport width. The light/dark asset swap lives in components/brand/brand.css. */
+.login-logo {
+  width: 100%;
+  max-width: 240px;
+  /* Centred horizontally in the card: auto inline margins centre a flex item that is narrower than
+     the column (the card is up to 420px, this box up to 240px). */
+  margin-inline: auto;
+  height: 64px;
+  object-fit: contain;
+  /* …and centred inside its own box, which matters on narrow screens where `width: 100%` makes the
+     box wider than the artwork and `contain` letterboxes it sideways. */
+  object-position: center;
+}

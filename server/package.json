@@ -1,0 +1,58 @@
+{
+  "name": "buildflow-server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BuildFlow CRM API (modular monolith)",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=.env src/index.ts",
+    "dev:worker": "tsx watch --env-file-if-exists=.env src/worker.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/index.js",
+    "start:worker": "node dist/worker.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "seed": "tsx --env-file-if-exists=.env src/seeds/index.ts",
+    "seed:prod": "node dist/seeds/index.js",
+    "migrate": "tsx --env-file-if-exists=.env src/migrations/index.ts",
+    "migrate:prod": "node dist/migrations/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "seed:demo": "tsx --env-file-if-exists=.env src/seeds/demo/seedDemo.ts",
+    "reconcile": "tsx --env-file-if-exists=.env src/scripts/reconcileRelations.ts"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.11.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.1",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.24.5",
+    "multer": "^2.4.0",
+    "node-cron": "^4.6.0",
+    "pino": "^10.4.0",
+    "pino-http": "^11.0.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^2.3.0",
+    "@types/node": "^24.19.1",
+    "@types/supertest": "^7.2.1",
+    "eslint": "^10.12.0",
+    "mongodb-memory-server": "^11.3.0",
+    "pino-pretty": "^13.2.0",
+    "supertest": "^7.3.1",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.1",
+    "vitest": "^5.0.3"
+  }
+}

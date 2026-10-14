@@ -1,0 +1,24 @@
+.booking-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+@media (max-width: 560px) {
+  .booking-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+.booking-alert {
+  border: 1px solid var(--border);
+  border-left: 4px solid #a3342b;
+  background: var(--surface-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-3);
+}
+.radio-row {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  padding: var(--space-2) 0;
+}

@@ -1,0 +1,207 @@
+/* Site Visits calendar — the visual side of the SiteVisitsPage "Calendar" tab. */
+
+.sv-calendar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sv-calendar-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.sv-calendar-nav {
+  display: inline-flex;
+  gap: var(--space-1);
+}
+.sv-calendar-range {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.sv-calendar-viewtoggle {
+  display: inline-flex;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px;
+}
+.sv-calendar-viewtoggle-item {
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.sv-calendar-viewtoggle-item.is-active {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.sv-calendar-grid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.sv-calendar-row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.sv-calendar-row--head {
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.sv-calendar-cell--head {
+  padding: 6px var(--space-2);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sv-calendar-cell--day {
+  min-height: 110px;
+  padding: var(--space-2);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  outline: none;
+}
+.sv-calendar-cell--day:nth-child(7n + 1) { border-left: 0; }
+.sv-calendar-cell--day.is-other-month { background: var(--surface-2); color: var(--ink-muted); }
+.sv-calendar-cell--day.is-today { background: var(--accent-soft); }
+.sv-calendar-cell--day:focus-visible { box-shadow: inset 0 0 0 2px var(--accent); }
+
+.sv-calendar-cell-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1);
+}
+.sv-calendar-daynum {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ink);
+}
+.sv-calendar-cell--day.is-other-month .sv-calendar-daynum { color: var(--ink-muted); }
+.sv-calendar-add {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  border: 1px dashed var(--border);
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 120ms ease, background 120ms ease, color 120ms ease;
+}
+.sv-calendar-cell--day:hover .sv-calendar-add,
+.sv-calendar-cell--day:focus-within .sv-calendar-add { opacity: 1; }
+.sv-calendar-add:hover { background: var(--accent); color: white; border-color: var(--accent); }
+.sv-calendar-add:disabled { opacity: 0 !important; cursor: not-allowed; }
+
+.sv-calendar-events {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 0;
+  overflow: hidden;
+}
+.sv-calendar-event { margin: 0; }
+.sv-calendar-event-btn {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 2px 6px;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: var(--surface-2);
+  border-left: 3px solid var(--info);
+  border-radius: 4px;
+  padding: 3px 6px;
+  font-size: 12px;
+  color: var(--ink);
+  cursor: pointer;
+  overflow: hidden;
+}
+.sv-calendar-event-btn:hover { background: var(--surface-3); }
+.sv-calendar-event.is-scheduled .sv-calendar-event-btn { border-left-color: var(--info); }
+.sv-calendar-event.is-completed .sv-calendar-event-btn { border-left-color: var(--success); opacity: 0.85; }
+.sv-calendar-event.is-cancelled .sv-calendar-event-btn { border-left-color: var(--ink-muted); opacity: 0.65; text-decoration: line-through; }
+.sv-calendar-event-time { font-weight: 600; color: var(--ink); }
+.sv-calendar-event-name { font-weight: 500; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sv-calendar-event-unit { grid-column: 1 / -1; color: var(--ink-muted); font-family: var(--font-mono); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sv-calendar-overflow { font-size: 11px; padding: 0; }
+
+/* "+N more" is a real control, not a dead label: it opens the day's full list. */
+.sv-calendar-overflow-btn {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-ink);
+  cursor: pointer;
+}
+.sv-calendar-overflow-btn:hover { background: var(--surface-3); }
+
+/* The dialog opened from "+N more": the same rows, without the per-cell truncation. */
+.sv-calendar-daylist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.sv-calendar-daylist .visit-row { padding: var(--space-2) 0; border-top: 1px solid var(--border); }
+.sv-calendar-daylist .visit-row:first-child { border-top: 0; }
+.sv-calendar-daylist-open {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  color: var(--ink);
+  text-align: left;
+  font-size: 14px;
+}
+.sv-calendar-daylist-open:hover { color: var(--accent-ink); }
+
+.sv-calendar-error { padding: var(--space-2) 0; }
+
+/* Responsive: at narrow widths the day cell shrinks and the cell text truncates harder so the
+   grid remains readable. The grid never wraps to a stacked layout because the calendar is
+   designed to be horizontally scrollable at very narrow widths. */
+@media (max-width: 720px) {
+  .sv-calendar-cell--day { min-height: 80px; padding: 4px; }
+  .sv-calendar-event-btn { font-size: 11px; padding: 2px 4px; }
+  .sv-calendar-event-unit { display: none; }
+  .sv-calendar-grid { overflow-x: auto; }
+}

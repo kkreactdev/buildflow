@@ -1,0 +1,13 @@
+.gsearch { position: relative; flex: 0 1 380px; min-width: 0; }
+.gsearch-box { display: flex; align-items: center; gap: var(--space-2); height: 36px; padding: 0 var(--space-3); border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--surface-2); color: var(--ink-muted); }
+.gsearch-box input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font: inherit; }
+.gsearch-panel { position: absolute; top: calc(100% + 6px); left: 0; right: 0; max-height: min(70vh, 480px); overflow-y: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); padding: var(--space-2); z-index: 40; }
+.gsearch-types { display: flex; flex-wrap: wrap; gap: var(--space-1); padding-bottom: var(--space-2); border-bottom: 1px solid var(--border-soft); }
+.gsearch-types button { border: 1px solid var(--border); background: var(--surface); color: var(--ink-2); border-radius: var(--radius-pill); padding: 2px var(--space-3); font-size: 0.75rem; cursor: pointer; }
+.gsearch-types button.is-active { background: var(--color-primary); color: var(--color-primary-ink); border-color: var(--color-primary); }
+.gsearch-note { margin: var(--space-3); color: var(--ink-muted); font-size: 0.875rem; }
+.gsearch-group { margin: var(--space-3) var(--space-2) var(--space-1); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-muted); }
+.gsearch-item { display: flex; flex-direction: column; gap: 2px; padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); cursor: pointer; }
+.gsearch-item span { color: var(--ink-muted); font-size: 0.8125rem; }
+.gsearch-item.is-active, .gsearch-item:hover { background: var(--accent-soft); }
+@media (max-width: 900px) { .gsearch { flex: 1 1 auto; } }

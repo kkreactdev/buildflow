@@ -1,0 +1,82 @@
+.unit-thumb {
+  width: 44px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  display: block;
+}
+.unit-thumb-empty {
+  width: 44px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px dashed var(--border);
+}
+.unit-price-filter {
+  display: inline-flex;
+  gap: var(--space-2);
+}
+.unit-price-filter input {
+  width: 120px;
+}
+.unit-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+@media (max-width: 560px) {
+  .unit-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-3);
+  margin: var(--space-3) 0;
+}
+.media-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+}
+.media-item img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  display: block;
+}
+.media-file {
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-2);
+  color: var(--ink-muted);
+  font-weight: 600;
+}
+.media-meta {
+  padding: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--text-sm);
+}
+.media-upload {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-3);
+  align-items: end;
+}
+
+/* unit picker used when recording interest */
+.unit-pick-list { display: flex; flex-direction: column; }
+.unit-pick { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); padding: var(--space-3) 0; border-bottom: 1px solid var(--border-soft); }
+.unit-pick:last-child { border-bottom: 0; }
+.unit-pick > div { min-width: 0; }
+.units-cell { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.units-cell-item { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }

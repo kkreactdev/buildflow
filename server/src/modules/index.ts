@@ -1,0 +1,30 @@
+import { Router } from 'express';
+import { activityRoutes } from './activities/activity.routes';
+import { auditRoutes } from './audit/audit.routes';
+import { authRoutes } from './auth/auth.routes';
+import { bookingRoutes } from './bookings/booking.routes';
+import { branchRoutes } from './branches/branch.routes';
+import { clientRoutes } from './clients/client.routes';
+import { companyRoutes } from './company/company.routes';
+import { masterRoutes } from './masters/master.routes';
+import { dashboardRoutes } from './dashboard/dashboard.routes';
+import { documentRoutes } from './documents/document.routes';
+import { enquiryRoutes } from './enquiries/enquiry.routes';
+import { followUpRoutes } from './followups/followup.routes';
+import { notificationRoutes } from './notifications/notification.routes';
+import { personRoutes } from './persons/person.routes';
+import { referralRoutes } from './referrals/referral.routes';
+import { reportRoutes } from './reports/report.routes';
+import { unitInterestRoutes } from './unitInterests/unitInterest.routes';
+import { searchRoutes } from './search/search.routes';
+import { sellerRoutes } from './sellers/seller.routes';
+import { roleRoutes } from './roles/role.routes';
+import { siteVisitRoutes } from './sitevisits/sitevisit.routes';
+import { unitRoutes } from './units/unit.routes';
+import { userRoutes } from './users/user.routes';
+import { whatsappTemplateRoutes } from './whatsappTemplates/whatsappTemplate.routes';
+import { workflowRoutes } from './workflow/workflow.routes';
+
+/** Every module router mounted under /api/v1. Each route declares its own access rule. */
+export const apiRouter = Router();
+apiRouter.use(authRoutes, userRoutes, roleRoutes, branchRoutes, companyRoutes, masterRoutes, workflowRoutes, personRoutes, clientRoutes, enquiryRoutes, followUpRoutes, siteVisitRoutes, unitRoutes, unitInterestRoutes, bookingRoutes, referralRoutes, sellerRoutes, documentRoutes, whatsappTemplateRoutes, dashboardRoutes, reportRoutes, searchRoutes, notificationRoutes, activityRoutes, auditRoutes);

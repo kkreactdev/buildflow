@@ -1,0 +1,231 @@
+.enq-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+.enq-toolbar-spacer {
+  flex: 1 1 auto;
+}
+.enq-date {
+  height: 38px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink);
+}
+.board {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  padding-bottom: var(--space-3);
+  align-items: flex-start;
+}
+.board-col {
+  flex: 0 0 272px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 260px);
+  transition: border-color var(--transition-fast), opacity var(--transition-fast), background var(--transition-fast);
+}
+.board-col-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3);
+  border-top: 3px solid var(--col-color, var(--border));
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  font-weight: 700;
+}
+.board-count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+.board-cards {
+  padding: 0 var(--space-2) var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  overflow-y: auto;
+  min-height: 56px;
+}
+.board-col.is-droppable {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.board-col.is-domain {
+  border-style: dashed;
+  border-color: var(--warning);
+}
+.board-col.is-blocked {
+  opacity: 0.45;
+}
+.board-hint {
+  padding: 0 var(--space-3) var(--space-2);
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+.enq-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: grab;
+  box-shadow: var(--shadow-sm);
+}
+.enq-card.is-pending {
+  opacity: 0.55;
+  cursor: progress;
+}
+.enq-card.is-dragging {
+  opacity: 0.4;
+}
+.enq-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.enq-card-name {
+  font-weight: 700;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--ink);
+}
+.enq-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+.board-more {
+  padding: var(--space-2) var(--space-3);
+  font-size: 12px;
+}
+.move-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.move-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  text-align: left;
+}
+.move-item:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---- enquiry detail: information cards ---------------------------------------------------------------
+   Two columns at the top — the Enquiry card (with its Person subsection) on the left, and a narrower
+   right column holding the Client card above the Assignment card — then the wider list sections
+   (Follow-ups, Site visits, Units, Referrals, Stage history, Activity, Audit) at full width.
+
+   A 12-column grid rather than `repeat(2, 1fr)` or `auto-fit`. Those two either forced the one-row
+   Client card to share a track with the nine-row Enquiry card, or handed each card an arbitrary width
+   the browser computed from the viewport, so the layout changed shape at every screen size. Explicit
+   spans give each card the width its content deserves and keep every card edge on the same grid lines:
+
+     1200px+    Enquiry 7 · right column 5 (Client above Assignment, both full width of the column)
+     641–1199   Enquiry 12 · right column 12
+     ≤640px     one column, everything full width
+
+   `align-items: start` keeps a card as tall as its own content instead of stretching it to match the
+   tallest thing beside it. Scoped to `.detail-grid--info` so the client detail grid — which shares
+   `.detail-grid` from clients.css — keeps its two equal columns. */
+
+.detail-grid--info {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-4);
+  align-items: start;
+}
+
+/* Default: anything not given an explicit width below spans the full content width. That covers every
+   list section, including the ones whose components don't carry .detail-section-full because they
+   are shared with other pages — without this they would collapse into a single 12th of the grid. */
+.detail-grid--info > .detail-card,
+.detail-grid--info > .detail-side { grid-column: 1 / -1; }
+
+/* The right column stacks Client above Assignment. It is a grid item rather than two separately
+   placed cards so the two cards always share one column and stay aligned, and so the column collapses
+   to full width on its own at narrower breakpoints. `min-width: 0` matters here: a grid item defaults
+   to `min-width: auto`, which would let a long unbroken value (an email, a URL) widen the column past
+   its track instead of wrapping inside it. */
+.detail-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+.detail-side > .detail-card { min-width: 0; }
+
+@media (min-width: 1200px) {
+  .detail-grid--info > .detail-card--enquiry { grid-column: span 7; }
+  .detail-grid--info > .detail-side { grid-column: span 5; }
+}
+
+/* Mobile: one column. The column count is restated rather than inherited, because clients.css sets
+   `.detail-grid { grid-template-columns: 1fr }` at the same specificity below 900px. */
+@media (max-width: 640px) {
+  .detail-grid--info { grid-template-columns: 1fr; }
+}
+
+/* Compact internals for these cards only, so a short card reads as a small panel rather than a
+   mostly-empty box. Colours, borders, shadows, typography and pills are untouched. */
+.detail-grid--info :is(.detail-card--enquiry, .detail-card--client, .detail-card--assignment) { padding: var(--space-4); }
+.detail-grid--info :is(.detail-card--enquiry, .detail-card--client, .detail-card--assignment) h3 { margin-bottom: var(--space-2); }
+.detail-grid--info :is(.detail-card--enquiry, .detail-card--client, .detail-card--assignment) .kv { gap: var(--space-1) var(--space-3); }
+.detail-grid--info :is(.detail-card--enquiry, .detail-card--client, .detail-card--assignment) .kv dt { line-height: 1.5; }
+.detail-grid--info :is(.detail-card--enquiry, .detail-card--client, .detail-card--assignment) .kv dd { line-height: 1.5; }
+
+/* The right column is narrower than the shared 130px label track leaves room for, so shrink the label
+   there. `.kv dd` already has `word-break: break-word`, so long emails and names wrap rather than
+   overflow, and the `min-width: 0` above stops the column itself being widened by them. */
+.detail-side .kv { grid-template-columns: 5.5rem minmax(0, 1fr); }
+
+/* Notes is prose rather than a short value, so it gets the whole card width instead of being squeezed
+   into the value column beside its own label. Scoped to the first `.kv` because the Person subsection
+   added below it ends with an `Address` row that should keep the ordinary label/value shape. */
+.detail-grid--info > .detail-card--enquiry > .kv:first-of-type > dt:last-of-type,
+.detail-grid--info > .detail-card--enquiry > .kv:first-of-type > dd:last-of-type { grid-column: 1 / -1; }
+
+/* Subheading between the Enquiry card's own fields and its Person fields. Muted and ruled, so it
+   reads as a group divider rather than a second card title. */
+.detail-grid--info > .detail-card--enquiry .detail-subhead {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  margin: var(--space-4) 0 var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+}

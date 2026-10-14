@@ -1,0 +1,16 @@
+.chart-panel { display: flex; flex-direction: column; gap: var(--space-4); flex: 1; min-width: 0; padding: var(--space-5); }
+.chart-panel .empty-state { padding: var(--space-5) var(--space-3); }
+.chart-panel .empty-state-icon { width: 40px; height: 40px; }
+.chart-panel .empty-state h3 { font-size: 14px; }
+.chart-panel-head { display: flex; justify-content: space-between; gap: var(--space-3); align-items: flex-start; }
+.chart-panel-head h3 { font-size: 15px; font-weight: 700; margin: 0; }
+.chart-panel-head p { margin: 2px 0 0; font-size: 12.5px; color: var(--ink-muted); }
+.chart-panel-actions { display: flex; align-items: center; gap: var(--space-2); }
+.info-dot { width: 20px; height: 20px; flex: none; border-radius: 50%; border: 1px solid var(--border); font-size: 11px; font-weight: 700; display: grid; place-items: center; color: var(--ink-muted); cursor: help; }
+.info-dot:hover, .info-dot:focus-visible { background: var(--accent-soft); color: var(--accent-ink); }
+.panel-note { display: flex; gap: var(--space-2); align-items: center; color: var(--ink-muted); font-size: 13px; }
+.chart-panel-head { flex-wrap: wrap; }
+.chart-panel-head > div:first-child { flex: 1 1 180px; min-width: 0; }
+.chart-panel-actions { margin-left: auto; }
+.chart-panel-actions .segmented { flex-wrap: nowrap; }
+.chart-panel-actions .segmented-item { white-space: nowrap; }

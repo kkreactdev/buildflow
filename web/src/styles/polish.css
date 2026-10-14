@@ -1,0 +1,110 @@
+/* ---------------------------------------------------------------------- */
+/* Shared visual polish, loaded last so it refines every module at once.  */
+/* Only appearance: no layout contracts, behaviour or markup depend on it. */
+/* ---------------------------------------------------------------------- */
+
+/* page background: a soft tint instead of flat paper */
+body {
+  background:
+    radial-gradient(60% 40% at 0% 0%, color-mix(in srgb, var(--tone-teal-2) 10%, transparent), transparent 70%),
+    radial-gradient(50% 40% at 100% 0%, color-mix(in srgb, var(--tone-blue-2) 9%, transparent), transparent 70%),
+    var(--paper);
+  background-attachment: fixed;
+}
+
+/* sidebar */
+.app-shell .sidebar { border-right: 1px solid var(--border-soft); box-shadow: 1px 0 0 rgba(0, 0, 0, 0.02); }
+.app-shell .sidebar-brand { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
+.app-shell .sidebar-nav { gap: 4px; padding: var(--space-4) var(--space-3); }
+.app-shell .sidebar-link { position: relative; padding: 10px var(--space-3); border-radius: var(--radius-md); font-weight: 600; transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast); }
+.app-shell .sidebar-link:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); transform: translateX(2px); }
+.app-shell .sidebar-link.is-active { color: #fff; background: linear-gradient(135deg, var(--tone-teal), color-mix(in srgb, var(--tone-blue) 78%, var(--tone-teal))); box-shadow: 0 8px 18px -10px var(--tone-teal); }
+.app-shell .sidebar-link.is-active::before { content: ''; position: absolute; left: -12px; top: 22%; bottom: 22%; width: 4px; border-radius: 0 4px 4px 0; background: var(--tone-teal-2); }
+.app-shell .sidebar-group-label { font-weight: 800; letter-spacing: 0.1em; padding-left: var(--space-3); }
+
+/* top bar: frosted, with a softer search field */
+.app-shell .topbar { background: color-mix(in srgb, var(--surface) 82%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-soft); }
+.app-shell .topbar-title { font-weight: 800; letter-spacing: -0.01em; }
+.app-shell .gsearch-box { background: var(--surface); border-color: var(--border-soft); box-shadow: var(--shadow-sm); transition: box-shadow var(--transition-base), border-color var(--transition-base); }
+.app-shell .gsearch-box:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+/* page headers used by existing modules */
+.app-content .page-header { margin-bottom: var(--space-5); }
+.app-content .page-header h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+
+/* buttons */
+.btn { transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-base); }
+.btn-primary { background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 70%, var(--tone-blue))); box-shadow: 0 6px 14px -8px var(--accent); }
+.btn-primary:hover { background: linear-gradient(135deg, var(--accent-strong), var(--accent)); box-shadow: 0 10px 20px -10px var(--accent); transform: translateY(-1px); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; box-shadow: none; transform: none; }
+
+/* inputs */
+.form-control:focus, .enq-date:focus, .dash-date input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); outline: none; }
+
+/* tables */
+.data-table-wrap { border-radius: var(--radius-lg); border-color: var(--border-soft); box-shadow: var(--shadow-card); background: var(--surface); }
+.data-table th { background: color-mix(in srgb, var(--accent) 5%, var(--surface-2)); font-size: 11.5px; letter-spacing: 0.06em; font-weight: 800; }
+.data-table tbody tr { transition: background var(--transition-fast); }
+.data-table tr.is-clickable:hover { background: color-mix(in srgb, var(--tone-teal) 7%, transparent); }
+
+/* filter bars */
+.filter-bar { padding: var(--space-3); background: var(--glass); border: 1px solid var(--border-soft); border-radius: var(--radius-md); }
+.search-input { border-radius: var(--radius-pill); }
+
+/* pills and id chips */
+.pill { letter-spacing: 0.01em; }
+.id-chip { font-family: var(--font-mono); font-size: 12px; padding: 2px 8px; border-radius: var(--radius-pill); background: var(--accent-soft); color: var(--accent-ink); }
+
+/* modal / drawer panels */
+.modal-panel { box-shadow: var(--shadow-lg); }
+
+/* content entrance: pages fade in once when a route mounts */
+.app-content > * { animation: page-in 360ms var(--ease-out) backwards; } /* backwards only: a filling transform animation would trap position:fixed dialogs inside the page */
+@keyframes page-in { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) { .app-content > * { animation: none; } }
+
+/* generic compact table used by Reports and panels */
+.dash-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+.dash-table th, .dash-table td { text-align: left; padding: 11px var(--space-4); border-bottom: 1px solid var(--border-soft); vertical-align: middle; }
+.dash-table tbody tr:last-child td, .dash-table tbody tr:last-child th { border-bottom: 0; }
+.dash-table tbody th { font-weight: 600; }
+
+/* compact, content-sized filter controls (never full-width stretched selects) */
+.filter-bar-filters .form-control { width: auto; min-width: 140px; max-width: 220px; }
+.filter-bar .search-input { flex: 0 1 280px; }
+
+/* Soft tinted surfaces that follow the tone system: reports summary, quick actions, empty states */
+.report-total { background: linear-gradient(135deg, color-mix(in srgb, var(--tone-teal) 12%, var(--surface)), color-mix(in srgb, var(--tone-teal) 4%, var(--surface))); border-color: color-mix(in srgb, var(--tone-teal) 26%, var(--border-soft)); }
+.empty-state-icon { background: color-mix(in srgb, var(--accent) 12%, var(--surface)); color: var(--accent); }
+.kpi-def:hover, .kpi-def:focus-visible { background: var(--accent-soft); color: var(--accent-ink); }
+
+/* small screens: let the search field take the room the page title would otherwise squeeze it out of */
+@media (max-width: 640px) {
+  .app-shell .topbar-title { display: none; }
+  .app-shell .gsearch { flex: 1 1 120px; }
+}
+
+/* ---- layout standards (list pages, filter bars, dialogs) ------------------------------------------------------------ */
+/* page title row: title left, actions right, wrapping instead of overflowing */
+.app-content .page-header { flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.app-content .page-header > h2 { min-width: 0; }
+
+/* filter bar: search on its own line of the panel, the filters in an even grid beneath (equal heights, no ragged rows) */
+.filter-bar { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.filter-bar .search-input { flex: 1 1 280px; max-width: 460px; min-width: 0; }
+.filter-bar-filters { flex: 1 1 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: var(--space-2); }
+.filter-bar-filters > * { min-width: 0; width: 100%; }
+.filter-bar-filters .form-control, .filter-bar-filters .enq-date { width: 100%; max-width: none; height: 38px; }
+.filter-bar-actions { margin-left: auto; }
+/* the first filters sit beside the search when there is only a handful */
+@media (min-width: 1100px) { .filter-bar:has(.filter-bar-filters > :nth-child(-n + 3):last-child) .filter-bar-filters { flex: 1 1 0; } }
+
+/* dialogs: bounded to the viewport, body scrolls, footer stays visible, paired fields stack on narrow screens */
+.modal-backdrop { overscroll-behavior: contain; }
+.modal-panel { max-height: min(90dvh, 780px); min-height: 0; }
+.modal-body { min-height: 0; overscroll-behavior: contain; }
+@media (max-width: 600px) {
+  .modal-backdrop { padding: var(--space-3); align-items: flex-end; }
+  .modal-panel { max-height: 94dvh; }
+  .modal-body .unit-grid-2, .modal-body .booking-grid-2, .modal-body .detail-grid { grid-template-columns: minmax(0, 1fr); }
+}

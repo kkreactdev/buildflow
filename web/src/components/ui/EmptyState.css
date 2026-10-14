@@ -1,0 +1,28 @@
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+  padding: var(--space-8) var(--space-5);
+  color: var(--ink-2);
+}
+.empty-state-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-3);
+  color: var(--ink-muted);
+}
+.empty-state h3 {
+  font-size: 16px;
+  color: var(--ink);
+}
+.empty-state p {
+  max-width: 420px;
+}
+.empty-state-action {
+  margin-top: var(--space-3);
+}

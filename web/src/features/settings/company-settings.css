@@ -1,0 +1,48 @@
+/* Company Settings: a row per logo slot, preview beside its controls. */
+
+.logo-field {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--border-soft);
+}
+.logo-field:first-of-type { border-top: 0; }
+
+.logo-preview {
+  flex: 0 0 auto;
+  width: 168px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2);
+  background: var(--surface-2);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+/* `contain` on a fixed box: a wide wordmark letterboxes, a square mark fits — neither is stretched. */
+.logo-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.logo-field-body { flex: 1 1 auto; min-width: 0; }
+.logo-field-body p { margin: 2px 0; }
+.logo-field-meta { font-size: 12px; }
+.logo-field-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .logo-field { flex-direction: column; gap: var(--space-2); }
+  .logo-preview { width: 100%; }
+}

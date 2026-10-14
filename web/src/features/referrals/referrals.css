@@ -1,0 +1,29 @@
+.flow-choice {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+@media (max-width: 560px) {
+  .flow-choice {
+    grid-template-columns: 1fr;
+  }
+}
+.flow-card {
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--ink);
+  padding: var(--space-3);
+  cursor: pointer;
+}
+.flow-card[aria-pressed='true'] {
+  border-color: var(--primary, #3f6690);
+  background: var(--surface-2);
+}
+.flow-card span {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+}
